@@ -4,52 +4,105 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TryDye - Coming Soon</title>
+
+  <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Elegant Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet"/>
+
+  <!-- Lottie Web -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+
   <style>
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
+    body {
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(-45deg, #d16ba5, #86a8e7, #5ffbf1);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
     }
-    .float {
-      animation: float 3s ease-in-out infinite;
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .fade-in {
       opacity: 0;
-      animation: fadeIn ease 1.5s forwards;
+      animation: fadeIn 2s ease-out forwards;
     }
 
     @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .brush-stroke {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.05;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    #lottie-brush {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem auto;
+      z-index: 10;
     }
   </style>
 </head>
-<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white min-h-screen flex flex-col items-center justify-center font-sans">
+<body class="min-h-screen text-white flex flex-col items-center justify-center relative overflow-hidden">
 
-  <div class="text-center fade-in">
-    <h1 class="text-6xl font-extrabold mb-4 tracking-wide drop-shadow-lg">🎨 TryDye</h1>
-    <p class="text-xl md:text-2xl mb-8 font-medium">Bringing Colour to Your World</p>
-    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/30 inline-block float transition-transform">
-      <p class="text-white text-lg md:text-xl font-light">
-        Our brushes are getting ready...<br>
-        <span class="font-semibold text-white text-2xl block mt-2">Launching Soon</span>
-      </p>
-    </div>
-    <p class="mt-10 text-sm text-white/70">Stay tuned – your walls will thank you!</p>
+  <!-- 🎨 Artistic Brush Stroke -->
+  <svg class="brush-stroke" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40,200 C140,100 260,120 380,180 C480,230 580,130 720,180 C780,200 780,240 720,260 C660,280 580,240 460,280 C340,320 260,280 160,240 C60,200 40,300 40,200 Z" fill="white"/>
+  </svg>
+
+  <!-- 🖌️ Lottie Paintbrush Animation -->
+  <div id="lottie-brush" class="fade-in"></div>
+
+  <!-- 🔵 Logo -->
+  <div class="w-16 h-16 bg-white/20 border-2 border-white/30 rounded-full flex items-center justify-center text-2xl font-bold mb-6 z-10">
+    TD
   </div>
 
-  <footer class="absolute bottom-6 text-white/60 text-sm">
+  <!-- ✨ Main Content -->
+  <div class="text-center fade-in z-10 px-4">
+    <h1 class="text-5xl md:text-6xl font-bold tracking-wide mb-4 drop-shadow-lg">TryDye</h1>
+    <p class="text-lg md:text-xl mb-6 font-light tracking-wide">
+      Elevating spaces with colour and creativity.
+    </p>
+    <div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20 inline-block">
+      <p class="text-lg md:text-xl text-white font-light">
+        🎨 Our website is preparing its first stroke...
+        <br>
+        <span class="text-2xl font-semibold block mt-2">Launching Soon</span>
+      </p>
+    </div>
+    <p class="mt-10 text-sm text-white/60">Let your walls express artistry – Stay tuned.</p>
+  </div>
+
+  <!-- 📅 Footer -->
+  <footer class="absolute bottom-5 text-white/50 text-sm z-10">
     &copy; <span id="year"></span> TryDye. All rights reserved.
   </footer>
 
+  <!-- JavaScript -->
   <script>
-    // Set current year in footer
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Lottie animation
+    lottie.loadAnimation({
+      container: document.getElementById('lottie-brush'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'Animation - 1747770733616.json' // Ensure this JSON file is in the same folder
+    });
   </script>
 </body>
 </html>
